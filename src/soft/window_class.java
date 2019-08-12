@@ -1,5 +1,4 @@
 package soft;
-import java.io.FileInputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +21,7 @@ import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+@SuppressWarnings("unused")
 //Application Window
 public class window_class extends Application {
 //objects	
@@ -30,22 +30,18 @@ public class window_class extends Application {
 	Button btn3 = new Button("3");
 	Button btn4 = new Button("4");
 	Circle cir = new Circle();
-	ColorPicker cp = new ColorPicker();
-	FileChooser fc = new FileChooser();
-	Label l2 = new Label("File[...]");
+	ColorPicker cp = new ColorPicker(); //The Button btn1 action sets the Colour of 'Circle cir'.
+	Label l2 = new Label("This is Button 2");
 	Label l3 = new Label("This is Button 3");
 	Label l4 = new Label("This is Button 4");
-
+	
+	
 	@Override
-	public void start(Stage S) throws Exception {
-//image object
-		FileInputStream input = new FileInputStream("src/soft/test.jpg");
-		Image img = new Image(input);
-		ImageView iv = new ImageView(img);
+	public void start(Stage S) {
 //Window
 		Pane layout = new Pane();
 		S.setTitle("Package Class");
-		S.setScene(new Scene(layout,500,550));
+		S.setScene(new Scene(layout,283,468));
 //object specifications
 			btn1.setPrefSize(25, 25);
 			btn2.setPrefSize(25, 25);
@@ -62,8 +58,7 @@ public class window_class extends Application {
 			l2.setLayoutX(25.0);
 			l3.setLayoutX(25.0);
 			l4.setLayoutX(25.0);
-			iv.setLayoutX(300.0);
-//Layout Y			
+			//Layout Y			
 			btn1.setLayoutY(0.0);
 			btn2.setLayoutY(25.0);
 			btn3.setLayoutY(50.0);
@@ -72,8 +67,7 @@ public class window_class extends Application {
 			l2.setLayoutY(25.0);
 			l3.setLayoutY(50.0);
 			l4.setLayoutY(75.0);
-			iv.setLayoutY(300.0);
-			layout.getChildren().addAll(cir,btn1,btn2,btn3,btn4,l2,l3,l4,iv,cp);
+			layout.getChildren().addAll(cir,btn1,btn2,btn3,btn4,l2,l3,l4,cp);
 			cir.setLayoutX(layout.getWidth()/2);
 			cir.setLayoutY(layout.getHeight()/2);
 //Actions
@@ -83,7 +77,6 @@ public class window_class extends Application {
 			btn4.setOnAction(e -> btn4func());
 			S.show();
 	}
-//Methods
 //---------------------------------------------------------------------------
 	//Button Functions
 				private Object btn1func() {
@@ -93,8 +86,6 @@ public class window_class extends Application {
 				}
 				private Object btn2func() {
 					System.out.println("Run.Time.Info:btn2func(args).excounter.");
-					java.io.File selectedFile = fc.showOpenDialog(null);
-					l2.setText("File ["+selectedFile+"]");
 					return null;
 				}
 				private Object btn3func() {
