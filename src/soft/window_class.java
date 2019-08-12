@@ -1,4 +1,7 @@
 package soft;
+import javafx.animation.Animation;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,11 +19,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 @SuppressWarnings("unused")
 //Application Window
 public class window_class extends Application {
@@ -31,17 +36,21 @@ public class window_class extends Application {
 	Button btn4 = new Button("4");
 	Circle cir = new Circle();
 	ColorPicker cp = new ColorPicker(); //The Button btn1 action sets the Colour of 'Circle cir'.
-	Label l2 = new Label("This is Button 2");
-	Label l3 = new Label("This is Button 3");
-	Label l4 = new Label("This is Button 4");
+	Label l2 = new Label("Circle ++");
+	Label l3 = new Label("Button 3");
+	Label l4 = new Label("Button 4");
+	static Pane layout = new Pane();
+	
+	
 	
 	
 	@Override
 	public void start(Stage S) {
 //Window
-		Pane layout = new Pane();
-		S.setTitle("Package Class");
-		S.setScene(new Scene(layout,283,468));
+		S.setTitle("Fetch Circle");
+		S.setScene(new Scene(layout,583,768));
+		S.setMaximized(true);
+		
 //object specifications
 			btn1.setPrefSize(25, 25);
 			btn2.setPrefSize(25, 25);
@@ -49,6 +58,16 @@ public class window_class extends Application {
 			btn4.setPrefSize(25, 25);
 			cp.setPrefSize(150, 25);
 			cir.setRadius(50);
+			cir.setFill(Color.BLUE);
+//Animations
+			ScaleTransition tranCir = new ScaleTransition(); 
+			tranCir.setDuration(Duration.seconds(4));
+			tranCir.setByX(0.5f);
+			tranCir.setByY(0.5f);
+			tranCir.setCycleCount(Animation.INDEFINITE);
+			tranCir.setAutoReverse(true);
+			tranCir.setNode(cir);
+			tranCir.play();
 //Layout X			
 			btn1.setLayoutX(0.0);
 			btn2.setLayoutX(0.0);
@@ -86,6 +105,11 @@ public class window_class extends Application {
 				}
 				private Object btn2func() {
 					System.out.println("Run.Time.Info:btn2func(args).excounter.");
+					Color Contain = cp.getValue();
+					int x=(int) (Math.random()*(((layout.getWidth())-0)+1)+0);//make random x location
+					int y=(int) (Math.random()*(((layout.getHeight())-175)+1)+175);//make random y location
+					soft.circle_class.createnew(Contain, x, y);
+					
 					return null;
 				}
 				private Object btn3func() {
