@@ -94,7 +94,7 @@ public class window_class extends Application {
 			btn2.setOnAction(e -> btn2func());
 			btn3.setOnAction(e -> btn3func());
 			btn4.setOnAction(e -> btn4func());
-			layout.setOnMouseClicked(e -> soft.circle_class.createnew(Color.BLACK, e.getSceneX() , e.getScreenY()));
+			layout.setOnMouseClicked(e -> soft.circle_class.createnew(cp.getValue(), e.getSceneX() , e.getScreenY()));
 			S.show();
 	}
 //---------------------------------------------------------------------------
