@@ -1,7 +1,7 @@
 # JavaFX
 ## Fetch Circle.java
 
-![Fetch Circle Version 1](http://boldnobold.com/FetchCircle-v2.JPG)
+![Fetch Circle](http://boldnobold.com/FetchCircle.gif)
 
 First Fetch
 ![Fetch Circle Version 1](http://boldnobold.com/FetchCircle.JPG)
