@@ -14,6 +14,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -35,39 +36,25 @@ public class window_class extends Application {
 	Button btn3 = new Button("3");
 	Button btn4 = new Button("4");
 	Circle cir = new Circle();
-	ColorPicker cp = new ColorPicker(); //The Button btn1 action sets the Colour of 'Circle cir'.
+	ColorPicker cp = new ColorPicker();
+	
 	Label l2 = new Label("Circle ++");
 	Label l3 = new Label("Button 3");
 	Label l4 = new Label("Button 4");
 	static Pane layout = new Pane();
-	
-	
-	
-	
 	@Override
 	public void start(Stage S) {
 //Window
-		S.setTitle("Fetch Circle");
+		S.setTitle("Fetch-Circle");
 		S.setScene(new Scene(layout,583,768));
 		S.setMaximized(true);
-		
 //object specifications
 			btn1.setPrefSize(25, 25);
 			btn2.setPrefSize(25, 25);
 			btn3.setPrefSize(25, 25);
 			btn4.setPrefSize(25, 25);
 			cp.setPrefSize(150, 25);
-			cir.setRadius(50);
-			cir.setFill(Color.BLUE);
-//Animations
-			ScaleTransition tranCir = new ScaleTransition(); 
-			tranCir.setDuration(Duration.seconds(4));
-			tranCir.setByX(0.5f);
-			tranCir.setByY(0.5f);
-			tranCir.setCycleCount(Animation.INDEFINITE);
-			tranCir.setAutoReverse(true);
-			tranCir.setNode(cir);
-			tranCir.play();
+			cp.setValue(Color.valueOf("#00ca03"));
 //Layout X			
 			btn1.setLayoutX(0.0);
 			btn2.setLayoutX(0.0);
@@ -86,15 +73,15 @@ public class window_class extends Application {
 			l2.setLayoutY(25.0);
 			l3.setLayoutY(50.0);
 			l4.setLayoutY(75.0);
-			layout.getChildren().addAll(cir,btn1,btn2,btn3,btn4,l2,l3,l4,cp);
-			cir.setLayoutX(layout.getWidth()/2);
-			cir.setLayoutY(layout.getHeight()/2);
+			layout.getChildren().addAll(btn1,btn2,btn3,btn4,l2,l3,l4,cp);
 //Actions
 			btn1.setOnAction(e -> btn1func());
 			btn2.setOnAction(e -> btn2func());
 			btn3.setOnAction(e -> btn3func());
 			btn4.setOnAction(e -> btn4func());
-			layout.setOnMouseClicked(e -> soft.circle_class.createnew(cp.getValue(), e.getSceneX() , e.getScreenY()));
+			layout.setOnMouseClicked(e -> {if (e.getButton() == MouseButton.PRIMARY) { 
+				soft.circle_class.createnew(cp.getValue(), e.getSceneX() , e.getScreenY());
+			}});
 			S.show();
 	}
 //---------------------------------------------------------------------------
@@ -110,7 +97,6 @@ public class window_class extends Application {
 					int x=(int) (Math.random()*(((layout.getWidth())-0)+1)+0);//make random x location
 					int y=(int) (Math.random()*(((layout.getHeight())-175)+1)+175);//make random y location
 					soft.circle_class.createnew(Contain, x, y);
-					
 					return null;
 				}
 				private Object btn3func() {
