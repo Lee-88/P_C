@@ -1,4 +1,8 @@
 # JavaFX
+## Toolbox GUI Added
+![Fetch Circle](http://boldnobold.com/FetchTools.gif)
+
+
 ## Fetch Circle.java
 
 ![Fetch Circle](http://boldnobold.com/FetchCircle.gif)
