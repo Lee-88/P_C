@@ -109,7 +109,6 @@ public class window_class extends Application {
 			cp.setLayoutY(0.0);
 			cp2.setLayoutY(0.0);
 			l2.setLayoutY(25.0);
-			
 			layout.getChildren().addAll(btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,l2,cp2,cp);
 //Actions
 			btn1.setOnAction(e -> btn1func());
