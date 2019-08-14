@@ -13,6 +13,9 @@ First Fetch
  
  
 ```
+14/08/2019
+Writing Toolbox methods
+Draft New Shapes
 
 13/08/2019
 -Class Constructor and Destructors Test Complete
