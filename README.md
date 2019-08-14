@@ -1,6 +1,4 @@
-# JavaFX
-
-## Fetch Circle.java
+# Fetch Circle
 
 ![Fetch Circle](http://boldnobold.com/FetchCircle.gif)
 
