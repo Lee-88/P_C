@@ -37,8 +37,9 @@ public class window_class extends Application {
 //objects
 //ToolBox Array
 	static float mysize = 50.f;
+	static boolean pressed = false;
 	static int[] toolbox = new int[14];
-	static Slider slider = new Slider(0, 10, 2.5);
+	static Slider slider = new Slider(0, 50, 10);
  	Button btn1 = new Button();
 	Button btn2 = new Button();
 	Button btn3 = new Button();
@@ -52,7 +53,7 @@ public class window_class extends Application {
 	Button btn11 = new Button();
 	Button btn12 = new Button();
 	Button btn13 = new Button();
-	ColorPicker cp = new ColorPicker();
+	static ColorPicker cp = new ColorPicker();
 	ColorPicker cp2 = new ColorPicker();
 	static Pane layout = new Pane();
 	
@@ -151,11 +152,13 @@ public class window_class extends Application {
 			btn11.setOnAction(e -> btn11func());
 			btn12.setOnAction(e -> btn12func());
 			btn13.setOnAction(e -> btn13func());
+			
 			//softcircle needs nesting inside a check tool function.
 			layout.setOnMouseClicked(e -> {if (e.getButton() == MouseButton.PRIMARY) { 
-			CheckTool(e);}} //This finds correct event for current tool selection from array comparison.
+			CheckTool(e);
+			System.out.println("Pressed");
+			}} //This finds correct event for current tool selection from array comparison.
 			); 
-			
 			
 			S.show();
 	}
@@ -168,6 +171,10 @@ private void CheckTool(MouseEvent e) {
 	}
 	//Btn1 Brush
 	if(toolbox[1] == 1) {
+		do {
+			soft.brush_class.createnew(cp.getValue(), e.getX() , e.getY());
+			
+			}while(e.getEventType().equals(MouseEvent.MOUSE_PRESSED));
 	}
 	//Btn2 Erase
 	if(toolbox[2] == 2) {

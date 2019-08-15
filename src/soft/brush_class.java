@@ -1,5 +1,31 @@
 package soft;
 
-public class brush_class {
+import java.awt.MouseInfo;
+import java.awt.Point;
 
-}
+import javafx.animation.Animation;
+import javafx.animation.ScaleTransition;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+
+public class brush_class {
+	
+		public static void createnew(Color xColor, double d, double e){
+			System.out.println("make circle");
+			Circle cir2 = new Circle();
+			cir2.setRadius(window_class.mysize);
+			cir2.setFill(xColor);
+			cir2.setLayoutX(d);
+			cir2.setLayoutY(e);
+			window_class.layout.getChildren().addAll(cir2);
+			//final Point p = MouseInfo.getPointerInfo().getLocation();
+			
+		}
+}			
+		
+
+
