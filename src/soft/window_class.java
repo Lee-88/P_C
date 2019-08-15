@@ -1,4 +1,6 @@
 package soft;
+import java.io.FileInputStream; 
+import java.io.FileNotFoundException; 
 import javafx.animation.Animation;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -12,9 +14,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -31,34 +35,52 @@ import javafx.util.Duration;
 //Application Window
 public class window_class extends Application {
 //objects
-	//int[][] toolbox = {0,0}{0,0};
-	Button btn1 = new Button("1");
-	Button btn2 = new Button("2");
-	Button btn3 = new Button("3");
-	Button btn4 = new Button("4");
-	Button btn5 = new Button("5");
-	Button btn6 = new Button("6");
-	Button btn7 = new Button("7");
-	Button btn8 = new Button("8");
-	Button btn9 = new Button("9");
-	Button btn10 = new Button("A");
-	Button btn11 = new Button("B");
-	Button btn12 = new Button("C");
-	Button btn13 = new Button("D");
-	Circle cir = new Circle();
+//ToolBox Array
+	static float mysize = 50.f;
+	static int[] toolbox = new int[14];
+	static Slider slider = new Slider(0, 10, 2.5);
+ 	Button btn1 = new Button();
+	Button btn2 = new Button();
+	Button btn3 = new Button();
+	Button btn4 = new Button();
+	Button btn5 = new Button();
+	Button btn6 = new Button();
+	Button btn7 = new Button();
+	Button btn8 = new Button();
+	Button btn9 = new Button();
+	Button btn10 = new Button();
+	Button btn11 = new Button();
+	Button btn12 = new Button();
+	Button btn13 = new Button();
 	ColorPicker cp = new ColorPicker();
 	ColorPicker cp2 = new ColorPicker();
-	Label l2 = new Label("Circle ++");
-	
 	static Pane layout = new Pane();
+	
 	@Override
-	public void start(Stage S) {
+	public void start(Stage S) throws FileNotFoundException {
+		layout.getStylesheets().add("/Stylesheet.css");
+//Toolbox initialiser Check
+		changetool(2);
 //Window
 		S.setTitle("Fetch-Circle");
-		S.setScene(new Scene(layout,1920,1080));
+		S.setScene(new Scene(layout,740,580));
 		S.setMaximized(true);
-//object specifications
-			btn1.setPrefSize(25, 25);
+//Button Images
+			Image image1 = new Image(getClass().getResourceAsStream("icons/btn1.jpg"));btn1.setGraphic(new ImageView(image1));
+		 	Image image2 = new Image(getClass().getResourceAsStream("icons/btn2.jpg"));btn2.setGraphic(new ImageView(image2));
+		 	Image image3 = new Image(getClass().getResourceAsStream("icons/btn3.jpg"));btn3.setGraphic(new ImageView(image3));
+		 	Image image4 = new Image(getClass().getResourceAsStream("icons/btn4.jpg"));btn4.setGraphic(new ImageView(image4));
+		 	Image image5 = new Image(getClass().getResourceAsStream("icons/btn5.jpg"));btn5.setGraphic(new ImageView(image5));
+		 	Image image6 = new Image(getClass().getResourceAsStream("icons/btn6.jpg"));btn6.setGraphic(new ImageView(image6));
+		 	Image image7 = new Image(getClass().getResourceAsStream("icons/btn7.jpg"));btn7.setGraphic(new ImageView(image7));
+		 	Image image8 = new Image(getClass().getResourceAsStream("icons/btn8.jpg"));btn8.setGraphic(new ImageView(image8));
+		 	Image image9 = new Image(getClass().getResourceAsStream("icons/btn9.jpg"));btn9.setGraphic(new ImageView(image9));
+		 	Image image10 = new Image(getClass().getResourceAsStream("icons/btn10.jpg"));btn10.setGraphic(new ImageView(image10));
+		 	Image image11 = new Image(getClass().getResourceAsStream("icons/btn11.jpg"));btn11.setGraphic(new ImageView(image11));
+		 	Image image12 = new Image(getClass().getResourceAsStream("icons/btn12.jpg"));btn12.setGraphic(new ImageView(image12));
+		 	Image image13 = new Image(getClass().getResourceAsStream("icons/btn13.jpg"));btn13.setGraphic(new ImageView(image13));
+//Object Sizes		 	
+		 	btn1.setPrefSize(25, 25);
 			btn2.setPrefSize(25, 25);
 			btn3.setPrefSize(25, 25);
 			btn4.setPrefSize(25, 25);
@@ -71,10 +93,15 @@ public class window_class extends Application {
 			btn11.setPrefSize(25, 25);
 			btn12.setPrefSize(25, 25);
 			btn13.setPrefSize(25, 25);
+//top Menu
 			cp.setPrefSize(150, 25);
 			cp.setValue(Color.valueOf("#00ca03"));
 			cp2.setPrefSize(150, 25);
 			cp2.setValue(Color.valueOf("#000000"));
+			slider.setShowTickMarks(true);
+			slider.setShowTickLabels(true);
+			slider.setMajorTickUnit(0.25f);
+		 	slider.setBlockIncrement(0.1f);
 //Layout X			
 			btn1.setLayoutX(0.0);
 			btn2.setLayoutX(0.0);
@@ -89,10 +116,10 @@ public class window_class extends Application {
 			btn11.setLayoutX(0.0);
 			btn12.setLayoutX(0.0);
 			btn13.setLayoutX(0.0);
-			cp.setLayoutX(25.0);
-			cp2.setLayoutX(175.0);
-			l2.setLayoutX(25.0);
-			//Layout Y			
+			cp.setLayoutX(30.0);
+			cp2.setLayoutX(180.0);
+			slider.setLayoutX(330.0);
+//Layout Y			
 			btn1.setLayoutY(0.0);
 			btn2.setLayoutY(25.0);
 			btn3.setLayoutY(50.0);
@@ -108,8 +135,8 @@ public class window_class extends Application {
 			btn13.setLayoutY(300.0);
 			cp.setLayoutY(0.0);
 			cp2.setLayoutY(0.0);
-			l2.setLayoutY(25.0);
-			layout.getChildren().addAll(btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,l2,cp2,cp);
+//Children
+			layout.getChildren().addAll(btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,cp2,cp,slider);
 //Actions
 			btn1.setOnAction(e -> btn1func());
 			btn2.setOnAction(e -> btn2func());
@@ -124,69 +151,161 @@ public class window_class extends Application {
 			btn11.setOnAction(e -> btn11func());
 			btn12.setOnAction(e -> btn12func());
 			btn13.setOnAction(e -> btn13func());
+			//softcircle needs nesting inside a check tool function.
 			layout.setOnMouseClicked(e -> {if (e.getButton() == MouseButton.PRIMARY) { 
-				soft.circle_class.createnew(cp.getValue(), e.getX() , e.getY());
-			}});
+			CheckTool(e);}} //This finds correct event for current tool selection from array comparison.
+			); 
+			
+			
 			S.show();
 	}
+//Check Too For Use
+private void CheckTool(MouseEvent e) {
+	System.out.println("Run.Time.Info:CheckTool().excounter.");
+	mysize = (float) (slider.getValue())*5;
+	//Btn 0
+	if(toolbox[0] == 0) {
+	}
+	//Btn1 Brush
+	if(toolbox[1] == 1) {
+	}
+	//Btn2 Erase
+	if(toolbox[2] == 2) {
+		}
+	//Btn3 Circle
+	if(toolbox[3] == 3) {
+		 soft.circle_class.createnew(cp.getValue(), e.getX() , e.getY());}
+	//Btn4 Square
+	if(toolbox[4] == 4) {
+		soft.square_class.createnew(cp.getValue(), e.getX() , e.getY());}
+	
+	//Btn5 Line
+	if(toolbox[5] == 5) {
+		soft.line_class.createnew(cp.getValue(), e.getX() , e.getY());}
+	
+	
+	//Btn6 Plus
+	if(toolbox[6] == 6) {
+	}
+	
+	//Btn7 Minus
+	if(toolbox[7] == 7) {
+	}
+	
+	//Btn8 Move
+	if(toolbox[8] == 8) {
+	}
+	
+	//Btn9 Trash All
+	if(toolbox[9] == 9) {
+	}
+	
+	//Btn10 Help
+	if(toolbox[10] == 10) {
+	}
+	
+	//Btn11 Options
+	if(toolbox[11] == 11) {
+	}
+	
+	//Btn12	information 
+	if(toolbox[12] == 12) {
+	}
+	
+	//Btn13 Text Create   
+	if(toolbox[13] == 13) {
+	}
+	
+	}
+//Toolbox Change Tool, input tool number to have tool selected.
+				private void changetool(int tb) {
+					 System.out.println("[System Readout- Array Reset]");
+					for (int i = 0; i < 14; i++) {
+			        	 toolbox[i]= 0;
+			        	 System.out.print(toolbox[i]+",");
+					}	
+					toolbox[tb]=tb;
+					System.out.print("\nThe Array Now Reads: ");
+					for (int i = 0; i < 14; i++) {
+			        	 System.out.print(toolbox[i]+",");
+			        	 }
+					System.out.print("\n----------------\n");
+			    }
 				//---------------------------------------------------------------------------
-	//Button Functions
+//Button Functions
 				private Object btn1func() {
 					System.out.println("Run.Time.Info:btn1func(args).excounter.");
-					cir.setFill(cp.getValue());
+					changetool(1);
 					return null;
 				}
 				private Object btn2func() {
 					System.out.println("Run.Time.Info:btn2func(args).excounter.");
-					Color Contain = cp.getValue();
-					int x=(int) (Math.random()*(((layout.getWidth())-0)+1)+0);//make random x location
-					int y=(int) (Math.random()*(((layout.getHeight())-175)+1)+175);//make random y location
-					soft.circle_class.createnew(Contain, x, y);
+					changetool(2);
 					return null;
 				}
 				private Object btn3func() {
 					System.out.println("Run.Time.Info:btn3func(args).excounter.");
+					changetool(3);
 					return null;
 				}
 				private Object btn4func() {
 					System.out.println("Run.Time.Info:btn4func(args).excounter.");
+					changetool(4);
 					return null;
 				}
 				private Object btn5func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn5func(args).excounter.");
+					changetool(5);
 					return null;
+
 				}
 				private Object btn6func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn6func(args).excounter.");
+					changetool(6);
 					return null;
+
 				}
 				private Object btn7func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn7func(args).excounter.");
+					changetool(7);
 					return null;
+
 				}
 				private Object btn8func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn8func(args).excounter.");
+					changetool(8);
 					return null;
+
 				}
 				private Object btn9func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn9func(args).excounter.");
+					changetool(9);
 					return null;
+
 				}
 				private Object btn10func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn10func(args).excounter.");
+					changetool(10);
 					return null;
+
 				}
 				private Object btn11func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn11func(args).excounter.");
+					changetool(11);
 					return null;
+
 				}
 				private Object btn12func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn12func(args).excounter.");
+					changetool(12);
 					return null;
+
 				}
 				private Object btn13func() {
-					// TODO Auto-generated method stub
+					System.out.println("Run.Time.Info:btn13func(args).excounter.");
+					changetool(13);
 					return null;
+
 				}
 //---------------------------------------------------------------------------
 //public main

@@ -7,13 +7,15 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class circle_class {
+public class square_class {
 	
 		public static void createnew(Color xColor, double d, double e){
-			Circle cir2 = new Circle();
-			cir2.setRadius(window_class.mysize);
+			Rectangle cir2 = new Rectangle();
+			cir2.setWidth(window_class.mysize*2);
+			cir2.setHeight(window_class.mysize*2);
 			cir2.setFill(xColor);
 			window_class.layout.getChildren().addAll(cir2);
 			cir2.setLayoutX(d);
