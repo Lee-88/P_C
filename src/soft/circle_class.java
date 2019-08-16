@@ -20,8 +20,8 @@ public class circle_class {
 			cir2.setLayoutY(e);
 			ScaleTransition tranCir = new ScaleTransition(); 
 			tranCir.setDuration(Duration.seconds(4));
-			tranCir.setByX(0.5f);
-			tranCir.setByY(0.5f);
+			tranCir.setByX(window_class.myspeed);
+			tranCir.setByY(window_class.myspeed);
 			tranCir.setCycleCount(Animation.INDEFINITE);
 			tranCir.setAutoReverse(true);
 			tranCir.setNode(cir2);

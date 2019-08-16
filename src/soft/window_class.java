@@ -36,10 +36,11 @@ import javafx.util.Duration;
 public class window_class extends Application {
 //objects
 //ToolBox Array
-	static float mysize = 50.f;
+	static float mysize = 0.f;
+	static float myspeed = 0.f;
 	static int[] toolbox = new int[14];
 	static Slider slider = new Slider(0, 50, 10);
-	
+	static Slider slider2 = new Slider(0, 10, 0);
  	Button btn1 = new Button();
 	Button btn2 = new Button();
 	Button btn3 = new Button();
@@ -62,7 +63,7 @@ public class window_class extends Application {
 	public void start(Stage S) throws FileNotFoundException {
 		layout.getStylesheets().add("/Stylesheet.css");
 //Toolbox initialiser Check
-		changetool(1);
+		changetool(0);
 //Window
 		S.setTitle("Fetch-Circle");
 		S.setScene(new Scene(layout,740,580));
@@ -104,6 +105,10 @@ public class window_class extends Application {
 			slider.setShowTickLabels(true);
 			slider.setMajorTickUnit(0.25f);
 		 	slider.setBlockIncrement(0.1f);
+		 	slider2.setShowTickMarks(true);
+			slider2.setShowTickLabels(true);
+			slider2.setMajorTickUnit(0.25f);
+		 	slider2.setBlockIncrement(0.1f);
 //Layout X			
 			btn1.setLayoutX(0.0);
 			btn2.setLayoutX(0.0);
@@ -121,6 +126,7 @@ public class window_class extends Application {
 			cp.setLayoutX(30.0);
 			cp2.setLayoutX(180.0);
 			slider.setLayoutX(330.0);
+			slider2.setLayoutX(470.0);
 //Layout Y			
 			btn1.setLayoutY(0.0);
 			btn2.setLayoutY(25.0);
@@ -138,7 +144,7 @@ public class window_class extends Application {
 			cp.setLayoutY(0.0);
 			cp2.setLayoutY(0.0);
 //Children
-			layout.getChildren().addAll(btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,cp2,cp,slider);
+			layout.getChildren().addAll(btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,cp2,cp,slider,slider2);
 //Actions
 			btn1.setOnAction(e -> btn1func());
 			btn2.setOnAction(e -> btn2func());
@@ -172,6 +178,7 @@ public class window_class extends Application {
 private void CheckTool(MouseEvent e) throws InterruptedException {
 	System.out.println("Run.Time.Info:CheckTool().excounter.");
 	mysize = (float) (slider.getValue())*5;
+	myspeed = (float) (slider2.getValue());
 	//Btn 0
 	if(toolbox[0] == 0) {
 	}
