@@ -36,6 +36,7 @@ import javafx.util.Duration;
 public class window_class extends Application {
 //objects
 //ToolBox Array
+	static boolean pressed = false;
 	static float mysize = 0.f;
 	static float myspeed = 0.f;
 	static int[] toolbox = new int[14];
@@ -168,14 +169,15 @@ public class window_class extends Application {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			System.out.println("Pressed");
+			
+			
 			}} //This finds correct event for current tool selection from array comparison.
 			); 
 			
 			S.show();
 	}
 //Check Too For Use
-private void CheckTool(MouseEvent e) throws InterruptedException {
+static void CheckTool(MouseEvent e) throws InterruptedException {
 	System.out.println("Run.Time.Info:CheckTool().excounter.");
 	mysize = (float) (slider.getValue())*5;
 	myspeed = (float) (slider2.getValue());
@@ -184,7 +186,9 @@ private void CheckTool(MouseEvent e) throws InterruptedException {
 	}
 	//Btn1 Brush
 	if(toolbox[1] == 1) {
-			soft.brush_class.createnew(cp.getValue(), e.getX() , e.getY());}
+		MyThread mythread = new MyThread();
+		mythread.run();
+		soft.brush_class.draw(cp.getValue(), e.getX() , e.getY());}
 	//Btn2 Erase
 	if(toolbox[2] == 2) {
 		}
